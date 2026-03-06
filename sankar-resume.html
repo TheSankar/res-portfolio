@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sankar — Web3 Marketing Intern</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --border: #1e1e2e;
+    --accent: #00f5a0;
+    --accent2: #7c3aed;
+    --muted: #4a4a6a;
+    --text: #e2e2f0;
+    --text-dim: #8888aa;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle at top left, rgba(124,58,237,0.15), transparent 70%);
+    pointer-events: none;
+  }
+  .page::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle at bottom right, rgba(0,245,160,0.1), transparent 70%);
+    pointer-events: none;
+  }
+
+  .header {
+    padding: 40px 44px 32px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .handle-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .handle-tag::before {
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #fff;
+  }
+
+  .role-line {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--text-dim);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+    margin-top: 20px;
+  }
+
+  .contact-item {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .contact-item .dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent2);
+    flex-shrink: 0;
+  }
+
+  .contact-item a {
+    color: var(--text-dim);
+    text-decoration: none;
+  }
+  .contact-item a:hover { color: var(--accent); }
+
+  .body {
+    display: grid;
+    grid-template-columns: 1fr 240px;
+  }
+
+  .main-col {
+    padding: 36px 44px;
+    border-right: 1px solid var(--border);
+  }
+
+  .side-col {
+    padding: 36px 28px;
+  }
+
+  .section-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .exp-item {
+    margin-bottom: 28px;
+    position: relative;
+    padding-left: 16px;
+  }
+
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 7px;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent2);
+  }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 2px;
+  }
+
+  .exp-role {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+  }
+
+  .exp-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    white-space: nowrap;
+    padding-top: 2px;
+  }
+
+  .exp-company {
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .exp-bullets li {
+    font-size: 12.5px;
+    color: var(--text-dim);
+    line-height: 1.55;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .exp-bullets li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+    font-size: 10px;
+  }
+
+  .exp-bullets li a {
+    color: var(--accent2);
+    text-decoration: none;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+  }
+  .exp-bullets li a:hover { color: var(--accent); }
+
+  .skill-group {
+    margin-bottom: 24px;
+  }
+
+  .skill-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    padding: 3px 9px;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    border-radius: 2px;
+    line-height: 1.6;
+  }
+
+  .tag.highlight {
+    border-color: rgba(0,245,160,0.3);
+    color: var(--accent);
+    background: rgba(0,245,160,0.04);
+  }
+
+  .metric {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    background: rgba(0,245,160,0.06);
+    border: 1px solid rgba(0,245,160,0.2);
+    padding: 1px 7px;
+    border-radius: 2px;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+
+  .edu-item {
+    margin-bottom: 18px;
+  }
+  .edu-degree {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .edu-school {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-bottom: 2px;
+  }
+  .edu-year {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  .side-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 22px 0;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .stat {
+    text-align: center;
+    padding: 10px 6px;
+    border: 1px solid var(--border);
+    background: rgba(0,0,0,0.3);
+  }
+  .stat-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 8px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { border: none; max-width: 100%; }
+    h1 { color: #000 !important; }
+    .tag, .metric { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="handle-tag">@TheSankarg · Web3 Content & Marketing</div>
+    <h1>Sankar</h1>
+    <div class="role-line">Web3 Digital Marketing Intern &nbsp;/&nbsp; Long-Form Content &nbsp;/&nbsp; Blockchain Education</div>
+
+    <div class="contacts">
+      <div class="contact-item"><span class="dot"></span><a href="https://x.com/TheSankarg" target="_blank">x.com/TheSankarg</a></div>
+      <div class="contact-item"><span class="dot"></span><a href="https://t.me/sankarorigin" target="_blank">t.me/sankarorigin</a></div>
+      <div class="contact-item"><span class="dot"></span><a href="https://github.com/TheSankar" target="_blank">github.com/TheSankar</a></div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- MAIN COLUMN -->
+    <div class="main-col">
+
+      <!-- ABOUT -->
+      <div class="section-title">About</div>
+      <div class="exp-item" style="margin-bottom: 32px;">
+        <p style="font-size:12.5px; color:var(--text-dim); line-height:1.65;">
+          Web3 contributor with <strong style="color:var(--text);">3 years</strong> in the crypto space, specialising in long-form posts and deep educational threads on X. Breaks down early-stage projects, DeFi protocols, and complex blockchain concepts into clear, accessible narratives. Technical background in CS enables faster, deeper research than most content creators. All work is publicly verifiable on-chain via profile.
+        </p>
+      </div>
+
+      <!-- EXPERIENCE -->
+      <div class="section-title">Experience</div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-role">Web3 Digital Marketing Intern</div>
+          <div class="exp-date">2024 – 2025</div>
+        </div>
+        <div class="exp-company">Deep Sense · Digital Marketing Agency</div>
+        <ul class="exp-bullets">
+          <li>Executed digital marketing campaigns across social media, SEO, and content channels for client brands</li>
+          <li>Produced written content, ad copy, and social media posts aligned with campaign goals and brand voice</li>
+          <li>Tracked campaign performance metrics and prepared reports using analytics tools</li>
+          <li>Supported client onboarding, strategy briefs, and cross-team coordination on deliverables</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-role">Independent Web3 Content Creator</div>
+          <div class="exp-date">2025 – Present</div>
+        </div>
+        <div class="exp-company">@TheSankarg · X (Twitter)</div>
+        <ul class="exp-bullets">
+          <li>Grew to 1,050 organic followers within months of consistent posting <span class="metric">100% organic</span></li>
+          <li>Generated 60k impressions and 4.5k engagements in recent weeks alone</li>
+          <li>Published threads on Abstract Ecosystem gaming, FHE, trading mechanics, and market analysis</li>
+          <li>Addressed protocol-level issues (0xppl notifications) — content picked up by community</li>
+        </ul>
+      </div>
+
+      <!-- CONTENT PORTFOLIO -->
+      <div class="section-title" style="margin-top: 4px;">Content Portfolio</div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-role">Abstract Ecosystem — Gaming Thread</div>
+          <div class="exp-date">Long-Form</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Deep-dive into Abstract's gaming layer; breakdown of ecosystem projects and mechanics — <a href="https://x.com/TheSankarg/status/1944087545853489336" target="_blank">↗ view post</a></li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-role">FHE (Fully Homomorphic Encryption)</div>
+          <div class="exp-date">Educational</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Simplified a cryptographic primitive most CT can't explain — made it accessible to a non-technical audience — <a href="https://x.com/TheSankarg/status/1984964925945717116" target="_blank">↗ view post</a></li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-role">How Trading Works on Blockchain</div>
+          <div class="exp-date">Educational</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Simple, visual breakdown of on-chain trading mechanics for beginners — <a href="https://x.com/TheSankarg/status/1995028350025306200" target="_blank">↗ view post</a></li>
+        </ul>
+      </div>
+
+      <div class="exp-item" style="margin-bottom:0;">
+        <div class="exp-header">
+          <div class="exp-role">Limitless First Impression · Market Crash Rant</div>
+          <div class="exp-date">Reviews / Analysis</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Protocol first-impression review — <a href="https://x.com/TheSankarg/status/1970028601039847788" target="_blank">↗ Limitless</a> &nbsp;·&nbsp; Raw market take during the 10/10 crash — <a href="https://x.com/TheSankarg/status/1976804989734359545" target="_blank">↗ crash rant</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- SIDE COLUMN -->
+    <div class="side-col">
+
+      <!-- SKILLS -->
+      <div class="section-title">Skills</div>
+
+      <div class="skill-group">
+        <div class="skill-label">Content</div>
+        <div class="skill-tags">
+          <span class="tag highlight">Long-Form Threads</span>
+          <span class="tag highlight">Deep Dives</span>
+          <span class="tag">Copywriting</span>
+          <span class="tag">Storytelling</span>
+          <span class="tag">Market Analysis</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-label">Web3 / Crypto</div>
+        <div class="skill-tags">
+          <span class="tag">DeFi</span>
+          <span class="tag">L2s</span>
+          <span class="tag">DAOs</span>
+          <span class="tag">Tokenomics</span>
+          <span class="tag">NFTs</span>
+          <span class="tag">FHE</span>
+          <span class="tag">GameFi</span>
+          <span class="tag">On-chain</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-label">Technical</div>
+        <div class="skill-tags">
+          <span class="tag highlight">Web Dev</span>
+          <span class="tag">Smart Contracts</span>
+          <span class="tag">GitHub</span>
+          <span class="tag">CS Fundamentals</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-label">Tools</div>
+        <div class="skill-tags">
+          <span class="tag">X / Twitter</span>
+          <span class="tag">Telegram</span>
+          <span class="tag">Notion</span>
+          <span class="tag">Dune</span>
+          <span class="tag">Typefully</span>
+        </div>
+      </div>
+
+      <div class="side-divider"></div>
+
+      <!-- EDUCATION -->
+      <div class="section-title">Education</div>
+
+      <div class="edu-item">
+        <div class="edu-degree">B.E. Computer Science</div>
+        <div class="edu-school">Engineering Graduate</div>
+        <div class="edu-year">CS Background</div>
+      </div>
+
+      <div class="side-divider"></div>
+
+      <!-- QUICK STATS -->
+      <div class="section-title">X Stats</div>
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="stat-num">1,050</div>
+          <div class="stat-label">Followers</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Organic</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">60k</div>
+          <div class="stat-label">Impr / wk</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">4.5k</div>
+          <div class="stat-label">Engage / wk</div>
+        </div>
+      </div>
+
+      <div class="side-divider"></div>
+
+      <div class="section-title">Experience</div>
+      <div style="font-family:'Space Mono',monospace; font-size:11px; color:var(--text-dim); line-height:1.8;">
+        3 years in crypto &amp; Web3<br>
+        Content · Marketing · Dev<br>
+        <span style="color:var(--accent);">2024–2025</span> · Intern
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
